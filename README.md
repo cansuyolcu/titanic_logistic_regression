@@ -150,11 +150,11 @@ train.head()
 
 <img src= "https://user-images.githubusercontent.com/66487971/88485694-7130ab80-cf80-11ea-8114-9d63fc173445.png" width = 500>
 
-## Building a Logistic Regression model
+# Building a Logistic Regression model
 
 I wanted to evaluate my classification so I split tge data into a training set and test set.
 
-# Train Test Split
+## Train Test Split
 
 
 ```python
@@ -191,4 +191,4 @@ print(classification_report(y_test,predictions))
 
 Not bad for a training data. Using the real test data on Kaggle gave 0.75 accuracy. After learning other methods I'll try to improve my score.
 
-# This is the end of my project. Thanks for reading all the way through.
+## This is the end of my project. Thanks for reading all the way through.
