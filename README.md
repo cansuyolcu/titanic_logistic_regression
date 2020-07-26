@@ -63,3 +63,43 @@ train['Fare'].hist(color='green',bins=40,figsize=(8,4))
 ```
 <img src= "https://user-images.githubusercontent.com/66487971/88485271-53157c00-cf7d-11ea-86ff-e914dddc3a06.png" width = 450>
 
+## Data Cleaning
+
+I filled the missing ages with the mean age of all the passengers in that class .
+
+```python
+plt.figure(figsize=(12, 7))
+sns.boxplot(x='Pclass',y='Age',data=train,palette='winter')
+```
+<img src= "(https://user-images.githubusercontent.com/66487971/88485392-0b432480-cf7e-11ea-9132-3e78a159f78f.png" width = 1000>
+
+It can see the wealthier passengers in the higher classes tend to be older, which makes sense. I use these average age values to impute based on Pclass for Age.
+
+```python
+def impute_age(cols):
+    Age = cols[0]
+    Pclass = cols[1]
+    
+    if pd.isnull(Age):
+
+        if Pclass == 1:
+            return 37
+
+        elif Pclass == 2:
+            return 29
+
+        else:
+            return 24
+
+    else:
+        return Age
+        ```
+        
+        ```python
+        train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
+        ```
+        
+        ```python
+        sns.heatmap(train.isnull(),yticklabels=False,cbar=False,cmap='viridis')
+        ```
+
