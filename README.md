@@ -76,6 +76,7 @@ sns.boxplot(x='Pclass',y='Age',data=train,palette='winter')
 It can see the wealthier passengers in the higher classes tend to be older, which makes sense. I use these average age values to impute based on Pclass for Age.
 
 ```python
+
 def impute_age(cols):
     Age = cols[0]
     Pclass = cols[1]
@@ -93,13 +94,6 @@ def impute_age(cols):
 
     else:
         return Age
-        ```
+```        
         
-        ```python
-        train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
-        ```
-        
-        ```python
-        sns.heatmap(train.isnull(),yticklabels=False,cbar=False,cmap='viridis')
-        ```
-
+     
