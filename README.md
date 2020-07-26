@@ -75,3 +75,78 @@ sns.boxplot(x='Pclass',y='Age',data=train,palette='winter')
 
 It can see the wealthier passengers in the higher classes tend to be older, which makes sense. I use these average age values to impute based on Pclass for Age.
 
+
+```python 
+
+def impute_age(cols):
+    Age = cols[0]
+    Pclass = cols[1]
+    
+    if pd.isnull(Age):
+
+        if Pclass == 1:
+            return 37
+
+        elif Pclass == 2:
+            return 29
+
+        else:
+            return 24
+
+    else:
+        return Age
+        
+```
+
+Filling the gaps.
+
+```python
+
+train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
+
+```
+
+Now I check the heatmap again.
+
+```python
+
+sns.heatmap(train.isnull(),yticklabels=False,cbar=False,cmap='viridis')
+
+```
+
+<img src= "https://user-images.githubusercontent.com/66487971/88485612-c0c2a780-cf7f-11ea-9033-f4b9ba418df1.png" width = 450>
+  
+
+Now I drop the Cabin Column.
+
+```python
+
+train.drop('Cabin',axis=1,inplace=True)
+train.dropna(inplace=True)
+
+```
+
+## Converting Categorical Features 
+
+I convert categorical features to dummy variables using pandas.
+
+```python
+train.info()
+```
+
+<img src= "https://user-images.githubusercontent.com/66487971/88485668-40507680-cf80-11ea-8b80-440d2a92addc.png" width = 450>
+
+```python
+sex = pd.get_dummies(train['Sex'],drop_first=True)
+embark = pd.get_dummies(train['Embarked'],drop_first=True)
+
+train.drop(['Sex','Embarked','Name','Ticket'],axis=1,inplace=True)
+
+train = pd.concat([train,sex,embark],axis=1)
+
+train.head()
+
+```
+
+<img src= "https://user-images.githubusercontent.com/66487971/88485694-7130ab80-cf80-11ea-8114-9d63fc173445.png" width = 400>
+
