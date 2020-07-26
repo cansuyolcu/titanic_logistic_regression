@@ -97,3 +97,12 @@ def impute_age(cols):
 ```        
         
      
+    Filling the gaps.
+        
+      
+```python
+       
+       train['Age'] = train[['Age','Pclass']].apply(impute_age,axis=1)
+
+
+
