@@ -134,7 +134,7 @@ I convert categorical features to dummy variables using pandas.
 train.info()
 ```
 
-<img src= "https://user-images.githubusercontent.com/66487971/88485668-40507680-cf80-11ea-8b80-440d2a92addc.png" width = 450>
+<img src= "https://user-images.githubusercontent.com/66487971/88485668-40507680-cf80-11ea-8b80-440d2a92addc.png" width = 350>
 
 ```python
 sex = pd.get_dummies(train['Sex'],drop_first=True)
@@ -148,5 +148,47 @@ train.head()
 
 ```
 
-<img src= "https://user-images.githubusercontent.com/66487971/88485694-7130ab80-cf80-11ea-8114-9d63fc173445.png" width = 400>
+<img src= "https://user-images.githubusercontent.com/66487971/88485694-7130ab80-cf80-11ea-8114-9d63fc173445.png" width = 500>
 
+## Building a Logistic Regression model
+
+I wanted to evaluate my classification so I split tge data into a training set and test set.
+
+# Train Test Split
+
+
+```python
+
+from sklearn.model_selection import train_test_split
+
+X_train=(train.drop('Survived',axis=1)
+y_test=train['Survived']
+
+```
+
+# Training and Predicting
+
+```python
+
+from sklearn.linear_model import LogisticRegression
+logmodel = LogisticRegression()
+logmodel.fit(X_train,y_train)
+predictions = logmodel.predict(X_test)
+
+```
+
+# Evaluation
+
+```python
+
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test,predictions))
+
+```
+
+<img src= "https://user-images.githubusercontent.com/66487971/88485772-4004ab00-cf81-11ea-96ff-ad96e8df17fc.png" width = 450>
+
+Not bad for a training data. Using the real test data on Kaggle gave 0.75 accuracy. After learning other methods I'll try to improve my score.
+
+# This is the end of my project. Thanks for reading all the way through.
